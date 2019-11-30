@@ -1,0 +1,27 @@
+﻿@model MidTermNetCore.Models.Khoa
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Xóa</h1>
+
+<h3>Bạn có chắc chắn muốn xóa khoa này không?</h3>
+<div>
+    <h4>Khoa</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Tên Khoa
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TenKhoa)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaKhoa" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">Về danh sách khoa</a>
+    </form>
+</div>
