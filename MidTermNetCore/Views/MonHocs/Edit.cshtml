@@ -14,29 +14,29 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MaMon" />
             <div class="form-group">
-                <label asp-for="TenMon" class="control-label"></label>
+                <label name="Tên môn" class="control-label"></label>
                 <input asp-for="TenMon" class="form-control" />
                 <span asp-validation-for="TenMon" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SoTinChi" class="control-label"></label>
+                <label name="Số tín chỉ" class="control-label"></label>
                 <input asp-for="SoTinChi" class="form-control" />
                 <span asp-validation-for="SoTinChi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MaKhoa" class="control-label"></label>
+                <label name="Mã khoa" class="control-label"></label>
                 <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.MaKhoa"></select>
                 <span asp-validation-for="MaKhoa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Trở về danh sách</a>
 </div>
 
 @section Scripts {
