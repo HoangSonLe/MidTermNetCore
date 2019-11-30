@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Point";
+}
+
+<h1>Point</h1>
+@model IEnumerable<PointViewModel>
+@{
+    ViewData["Title"] = "Xem Điểm";
+}
+
+<h1>Điểm sinh viên có mã </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Môn Học
+            </th>
+            <th>
+                Mã Lớp Học Phần
+            </th>
+            <th>
+                Học Kỳ
+            </th>
+            <th>
+                Năm Học
+            </th>
+            <th>
+                Điểm Giữa Kỳ
+            </th>
+            <th>
+                Điểm Cuối Kỳ
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+        }
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>
+                    @count
+                </td>
+                <td>
+                    @item.MonHoc
+                </td>
+                <td>
+                    @item.MaLHP
+                </td>
+                <td>
+                    @item.HocKy
+                </td>
+                <td>
+                    @item.NamHoc
+                </td>
+                <td>
+                    @item.DiemGK
+                </td>
+                <td>
+                    @item.DiemCK
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaSV">Sửa</a> |
+                    <a asp-action="Details" asp-route-id="@item.MaSV">Chi Tiết</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MaSV">Xóa</a> |
+                    <a asp-action="Point" asp-route-id="@item.MaSV">Điểm</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

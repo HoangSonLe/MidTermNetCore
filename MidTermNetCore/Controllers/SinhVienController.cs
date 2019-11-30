@@ -148,5 +148,35 @@ namespace MidTermNetCore.Controllers
         {
             return _context.SinhViens.Any(e => e.MaSV == id);
         }
+
+        // GET: SinhVien/Edit/5
+        public async Task<IActionResult> Point(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var points = await _context.LopHocPhans
+                                .Include(p => p.MonHocNavigation)
+                                .Where(l => l.MaSV == id)
+                                .Select(l => new PointViewModel()
+                                {
+                                    NamHoc = l.NamHoc,
+                                    MonHoc = l.MonHocNavigation.TenMon,
+                                    MaLHP = l.MaLHP,
+                                    DiemCK = l.DiemCK,
+                                    DiemGK = l.DiemGK,
+                                    HocKy = l.HocKy,
+                                    MaSV = l.MaSV
+                                }
+                                ).ToListAsync();
+
+            if (points == null)
+            {
+                return NotFound();
+            }
+            return View(points);
+        }
     }
 }
