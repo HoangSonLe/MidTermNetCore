@@ -17,9 +17,8 @@ namespace MidTermNetCore.Models
         public DateTime NgaySinh { get; set; }
         [StringLength(11)]
         public string DienThoai { get; set; }
-        public int MaKhoa { get; set; }
+        public int? MaKhoa { get; set; }
         [ForeignKey("MaKhoa")]
         public virtual Khoa KhoaNavigation { get; set; }
-        public virtual ICollection<KetQua> KetQuas { get; set; }
     }
 }

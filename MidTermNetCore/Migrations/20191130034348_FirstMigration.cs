@@ -51,14 +51,14 @@ namespace MidTermNetCore.Migrations
                     HoTen = table.Column<string>(maxLength: 50, nullable: true),
                     NgaySinh = table.Column<DateTime>(nullable: false),
                     DienThoai = table.Column<string>(maxLength: 11, nullable: true),
-                    KhoaNavigationMaKhoa = table.Column<int>(nullable: true)
+                    MaKhoa = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SinhViens", x => x.MaSV);
                     table.ForeignKey(
-                        name: "FK_SinhViens_Khoas_KhoaNavigationMaKhoa",
-                        column: x => x.KhoaNavigationMaKhoa,
+                        name: "FK_SinhViens_Khoas_MaKhoa",
+                        column: x => x.MaKhoa,
                         principalTable: "Khoas",
                         principalColumn: "MaKhoa",
                         onDelete: ReferentialAction.Restrict);
@@ -72,61 +72,38 @@ namespace MidTermNetCore.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NamHoc = table.Column<int>(nullable: false),
                     HocKy = table.Column<int>(nullable: false),
-                    MonHocNavigationMaMon = table.Column<int>(nullable: true)
+                    DiemGK = table.Column<double>(nullable: false),
+                    DiemCK = table.Column<double>(nullable: false),
+                    MaSV = table.Column<int>(nullable: true),
+                    Mon = table.Column<int>(nullable: true),
+                    MaMonHoc = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LopHocPhans", x => x.MaLHP);
                     table.ForeignKey(
-                        name: "FK_LopHocPhans_MonHocs_MonHocNavigationMaMon",
-                        column: x => x.MonHocNavigationMaMon,
+                        name: "FK_LopHocPhans_MonHocs_MaMonHoc",
+                        column: x => x.MaMonHoc,
                         principalTable: "MonHocs",
                         principalColumn: "MaMon",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "KetQuas",
-                columns: table => new
-                {
-                    MaKetQua = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DiemGK = table.Column<double>(nullable: false),
-                    DiemCK = table.Column<double>(nullable: false),
-                    SinhVienNavigationMaSV = table.Column<int>(nullable: true),
-                    LopHocPhanNavigationMaLHP = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_KetQuas", x => x.MaKetQua);
                     table.ForeignKey(
-                        name: "FK_KetQuas_LopHocPhans_LopHocPhanNavigationMaLHP",
-                        column: x => x.LopHocPhanNavigationMaLHP,
-                        principalTable: "LopHocPhans",
-                        principalColumn: "MaLHP",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_KetQuas_SinhViens_SinhVienNavigationMaSV",
-                        column: x => x.SinhVienNavigationMaSV,
+                        name: "FK_LopHocPhans_SinhViens_MaSV",
+                        column: x => x.MaSV,
                         principalTable: "SinhViens",
                         principalColumn: "MaSV",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_KetQuas_LopHocPhanNavigationMaLHP",
-                table: "KetQuas",
-                column: "LopHocPhanNavigationMaLHP");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_KetQuas_SinhVienNavigationMaSV",
-                table: "KetQuas",
-                column: "SinhVienNavigationMaSV");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LopHocPhans_MonHocNavigationMaMon",
+                name: "IX_LopHocPhans_MaMonHoc",
                 table: "LopHocPhans",
-                column: "MonHocNavigationMaMon");
+                column: "MaMonHoc");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LopHocPhans_MaSV",
+                table: "LopHocPhans",
+                column: "MaSV");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MonHocs_MaKhoa",
@@ -134,24 +111,21 @@ namespace MidTermNetCore.Migrations
                 column: "MaKhoa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SinhViens_KhoaNavigationMaKhoa",
+                name: "IX_SinhViens_MaKhoa",
                 table: "SinhViens",
-                column: "KhoaNavigationMaKhoa");
+                column: "MaKhoa");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "KetQuas");
-
-            migrationBuilder.DropTable(
                 name: "LopHocPhans");
 
             migrationBuilder.DropTable(
-                name: "SinhViens");
+                name: "MonHocs");
 
             migrationBuilder.DropTable(
-                name: "MonHocs");
+                name: "SinhViens");
 
             migrationBuilder.DropTable(
                 name: "Khoas");

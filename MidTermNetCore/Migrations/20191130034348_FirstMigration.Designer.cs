@@ -10,7 +10,7 @@ using MidTermNetCore.Models;
 namespace MidTermNetCore.Migrations
 {
     [DbContext(typeof(MyDBContext))]
-    [Migration("20191130022003_FirstMigration")]
+    [Migration("20191130034348_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,29 +20,6 @@ namespace MidTermNetCore.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("MidTermNetCore.Models.KetQua", b =>
-                {
-                    b.Property<int>("MaKetQua")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("DiemCK");
-
-                    b.Property<double>("DiemGK");
-
-                    b.Property<int?>("LopHocPhanNavigationMaLHP");
-
-                    b.Property<int?>("SinhVienNavigationMaSV");
-
-                    b.HasKey("MaKetQua");
-
-                    b.HasIndex("LopHocPhanNavigationMaLHP");
-
-                    b.HasIndex("SinhVienNavigationMaSV");
-
-                    b.ToTable("KetQuas");
-                });
 
             modelBuilder.Entity("MidTermNetCore.Models.Khoa", b =>
                 {
@@ -64,15 +41,25 @@ namespace MidTermNetCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<double>("DiemCK");
+
+                    b.Property<double>("DiemGK");
+
                     b.Property<int>("HocKy");
 
-                    b.Property<int?>("MonHocNavigationMaMon");
+                    b.Property<int?>("MaMonHoc");
+
+                    b.Property<int?>("MaSV");
+
+                    b.Property<int?>("Mon");
 
                     b.Property<int>("NamHoc");
 
                     b.HasKey("MaLHP");
 
-                    b.HasIndex("MonHocNavigationMaMon");
+                    b.HasIndex("MaMonHoc");
+
+                    b.HasIndex("MaSV");
 
                     b.ToTable("LopHocPhans");
                 });
@@ -109,47 +96,40 @@ namespace MidTermNetCore.Migrations
                     b.Property<string>("HoTen")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("KhoaNavigationMaKhoa");
+                    b.Property<int?>("MaKhoa");
 
                     b.Property<DateTime>("NgaySinh");
 
                     b.HasKey("MaSV");
 
-                    b.HasIndex("KhoaNavigationMaKhoa");
+                    b.HasIndex("MaKhoa");
 
                     b.ToTable("SinhViens");
-                });
-
-            modelBuilder.Entity("MidTermNetCore.Models.KetQua", b =>
-                {
-                    b.HasOne("MidTermNetCore.Models.LopHocPhan", "LopHocPhanNavigation")
-                        .WithMany("KetQuas")
-                        .HasForeignKey("LopHocPhanNavigationMaLHP");
-
-                    b.HasOne("MidTermNetCore.Models.SinhVien", "SinhVienNavigation")
-                        .WithMany("KetQuas")
-                        .HasForeignKey("SinhVienNavigationMaSV");
                 });
 
             modelBuilder.Entity("MidTermNetCore.Models.LopHocPhan", b =>
                 {
                     b.HasOne("MidTermNetCore.Models.MonHoc", "MonHocNavigation")
-                        .WithMany("LopHocPhans")
-                        .HasForeignKey("MonHocNavigationMaMon");
+                        .WithMany()
+                        .HasForeignKey("MaMonHoc");
+
+                    b.HasOne("MidTermNetCore.Models.SinhVien", "SinhVienNavigation")
+                        .WithMany()
+                        .HasForeignKey("MaSV");
                 });
 
             modelBuilder.Entity("MidTermNetCore.Models.MonHoc", b =>
                 {
                     b.HasOne("MidTermNetCore.Models.Khoa", "KhoaNavigation")
-                        .WithMany("MonHocs")
+                        .WithMany()
                         .HasForeignKey("MaKhoa");
                 });
 
             modelBuilder.Entity("MidTermNetCore.Models.SinhVien", b =>
                 {
                     b.HasOne("MidTermNetCore.Models.Khoa", "KhoaNavigation")
-                        .WithMany("SinhViens")
-                        .HasForeignKey("KhoaNavigationMaKhoa");
+                        .WithMany()
+                        .HasForeignKey("MaKhoa");
                 });
 #pragma warning restore 612, 618
         }

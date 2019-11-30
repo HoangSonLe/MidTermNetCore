@@ -11,7 +11,6 @@ namespace MidTermNetCore.Models
         public DbSet<SinhVien> SinhViens { get; set; }
         public DbSet<Khoa> Khoas { get; set; }
         public DbSet<LopHocPhan> LopHocPhans { get; set; }
-        public DbSet<KetQua> KetQuas { get; set; }
         public DbSet<MonHoc> MonHocs { get; set; }
         public MyDBContext(DbContextOptions<MyDBContext>
        options) : base(options)

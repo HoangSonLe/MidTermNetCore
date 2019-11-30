@@ -16,9 +16,13 @@ namespace MidTermNetCore.Models
         public int NamHoc { get; set; }
         [Required]
         public int HocKy { get; set; }
-        public int MaMonHoc { get; set; }
+        public double DiemGK { get; set; }
+        public double DiemCK { get; set; }
+        public int? MaSV { get; set; }
+        [ForeignKey("MaSV")]
+        public virtual SinhVien SinhVienNavigation { get; set; }
+        public int? Mon { get; set; }
         [ForeignKey("MaMonHoc")]
         public virtual MonHoc MonHocNavigation { get; set; }
-        public virtual ICollection<KetQua> KetQuas { get; set; }
     }
 }
