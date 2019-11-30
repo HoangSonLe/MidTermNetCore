@@ -15,7 +15,7 @@ namespace MidTermNetCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,7 +35,7 @@ namespace MidTermNetCore.Migrations
 
             modelBuilder.Entity("MidTermNetCore.Models.LopHocPhan", b =>
                 {
-                    b.Property<int>("MaLHP")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -45,17 +45,17 @@ namespace MidTermNetCore.Migrations
 
                     b.Property<int>("HocKy");
 
-                    b.Property<int?>("MaMonHoc");
+                    b.Property<int>("MaLHP");
+
+                    b.Property<int?>("MaMon");
 
                     b.Property<int?>("MaSV");
 
-                    b.Property<int?>("Mon");
-
                     b.Property<int>("NamHoc");
 
-                    b.HasKey("MaLHP");
+                    b.HasKey("ID");
 
-                    b.HasIndex("MaMonHoc");
+                    b.HasIndex("MaMon");
 
                     b.HasIndex("MaSV");
 
@@ -109,7 +109,7 @@ namespace MidTermNetCore.Migrations
                 {
                     b.HasOne("MidTermNetCore.Models.MonHoc", "MonHocNavigation")
                         .WithMany()
-                        .HasForeignKey("MaMonHoc");
+                        .HasForeignKey("MaMon");
 
                     b.HasOne("MidTermNetCore.Models.SinhVien", "SinhVienNavigation")
                         .WithMany()

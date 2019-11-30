@@ -145,6 +145,8 @@ namespace MidTermNetCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var lhp = await _context.LopHocPhans.FirstOrDefaultAsync(l=>l.MaSV==id);
+            _context.LopHocPhans.Remove(lhp);
             var sinhVien = await _context.SinhViens.FindAsync(id);
             _context.SinhViens.Remove(sinhVien);
             await _context.SaveChangesAsync();
@@ -155,5 +157,34 @@ namespace MidTermNetCore.Controllers
         {
             return _context.SinhViens.Any(e => e.MaSV == id);
         }
+        public async Task<IActionResult> Point(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var points = await _context.LopHocPhans
+                                .Include(p => p.MonHocNavigation)
+                                .Where(l => l.MaSV == id)
+                                .Select(l => new PointViewModel()
+                                {
+                                    NamHoc = l.NamHoc,
+                                    MonHoc = l.MonHocNavigation.TenMon,
+                                    MaLHP = l.MaLHP,
+                                    DiemCK = l.DiemCK,
+                                    DiemGK = l.DiemGK,
+                                    HocKy = l.HocKy,
+                                    MaSV = l.MaSV
+                                }
+                                ).ToListAsync();
+
+            if (points == null)
+            {
+                return NotFound();
+            }
+            return View(points);
+        }
+
     }
 }

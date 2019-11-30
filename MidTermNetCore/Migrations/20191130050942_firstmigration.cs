@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MidTermNetCore.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class firstmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,22 +68,22 @@ namespace MidTermNetCore.Migrations
                 name: "LopHocPhans",
                 columns: table => new
                 {
-                    MaLHP = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MaLHP = table.Column<int>(nullable: false),
                     NamHoc = table.Column<int>(nullable: false),
                     HocKy = table.Column<int>(nullable: false),
                     DiemGK = table.Column<double>(nullable: false),
                     DiemCK = table.Column<double>(nullable: false),
                     MaSV = table.Column<int>(nullable: true),
-                    Mon = table.Column<int>(nullable: true),
-                    MaMonHoc = table.Column<int>(nullable: true)
+                    MaMon = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LopHocPhans", x => x.MaLHP);
+                    table.PrimaryKey("PK_LopHocPhans", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_LopHocPhans_MonHocs_MaMonHoc",
-                        column: x => x.MaMonHoc,
+                        name: "FK_LopHocPhans_MonHocs_MaMon",
+                        column: x => x.MaMon,
                         principalTable: "MonHocs",
                         principalColumn: "MaMon",
                         onDelete: ReferentialAction.Restrict);
@@ -96,9 +96,9 @@ namespace MidTermNetCore.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_LopHocPhans_MaMonHoc",
+                name: "IX_LopHocPhans_MaMon",
                 table: "LopHocPhans",
-                column: "MaMonHoc");
+                column: "MaMon");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LopHocPhans_MaSV",

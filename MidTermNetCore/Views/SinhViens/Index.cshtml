@@ -4,25 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Trang chủ</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Tạo mới</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.HoTen)
+                Họ tên
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgaySinh)
+                Ngày sinh
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DienThoai)
+                Điện thoại
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KhoaNavigation)
+                Khoa
             </th>
             <th></th>
         </tr>
@@ -43,9 +43,10 @@
                 @Html.DisplayFor(modelItem => item.KhoaNavigation.TenKhoa)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaSV">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaSV">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaSV">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.MaSV">Sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.MaSV">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaSV">Xóa</a> |
+                <a asp-action="Point" asp-route-id="@item.MaSV">Điểm</a>
             </td>
         </tr>
 }

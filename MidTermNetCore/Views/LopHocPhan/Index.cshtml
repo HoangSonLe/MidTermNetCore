@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MidTermNetCore.Models.LopHPView>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mã lớp học phần
+            </th>
+            <th>
+                Tên môn học
+            </th>
+            <th>
+                Tên sinh viên
+            </th>
+            <th>
+                Học kỳ
+            </th>
+            <th>
+               Điểm giữa kỳ
+            </th>
+            <th>
+                Điểm cuối kỳ
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLopHP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenMon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocKy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiemGK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiemCK)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

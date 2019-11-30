@@ -11,6 +11,8 @@ namespace MidTermNetCore.Models
     {
         [Key]
         [Required]
+        public int ID { get; set; }
+        [Required(ErrorMessage ="Vui lòng nhập mã học phần")]
         public int MaLHP { get; set; }
         [Required]
         public int NamHoc { get; set; }
@@ -21,8 +23,8 @@ namespace MidTermNetCore.Models
         public int? MaSV { get; set; }
         [ForeignKey("MaSV")]
         public virtual SinhVien SinhVienNavigation { get; set; }
-        public int? Mon { get; set; }
-        [ForeignKey("MaMonHoc")]
+        public int? MaMon { get; set; }
+        [ForeignKey("MaMon")]
         public virtual MonHoc MonHocNavigation { get; set; }
     }
 }
