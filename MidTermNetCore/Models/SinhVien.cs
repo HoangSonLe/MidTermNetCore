@@ -15,6 +15,6 @@ namespace MidTermNetCore.Models
         public DateTime NgaySinh { get; set; }
         public string DienThoai { get; set; }
         public virtual string MaKhoaNavigation { get; set; }
-        public virtual ICollection<KetQua> KetQua { get; set; }
+        public virtual ICollection<KetQua> KetQuas { get; set; }
     }
 }
