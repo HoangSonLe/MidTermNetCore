@@ -10,11 +10,13 @@ namespace MidTermNetCore.Models
     {
         [Key]
         [Required]
-        public string MaSV { get; set; }
+        public int MaSV { get; set; }
+        [StringLength(50)]
         public string HoTen { get; set; }
         public DateTime NgaySinh { get; set; }
+        [StringLength(11)]
         public string DienThoai { get; set; }
-        public virtual string MaKhoaNavigation { get; set; }
-        public virtual ICollection<KetQua> KetQua { get; set; }
+        public virtual int MaKhoaNavigation { get; set; }
+        public virtual ICollection<KetQua> KetQuas { get; set; }
     }
 }
