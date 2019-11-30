@@ -16,5 +16,6 @@ namespace MidTermNetCore.Models
         [MinLength(2,ErrorMessage ="Tên khoa phải nhiều hơn 2 kí tự")]
         public string TenKhoa { get; set; }
         public virtual ICollection<MonHoc> MonHocs { get; set; }
+        public virtual ICollection<SinhVien> SinhViens { get; set; }
     }
 }
