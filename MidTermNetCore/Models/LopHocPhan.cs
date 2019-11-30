@@ -11,6 +11,8 @@ namespace MidTermNetCore.Models
     {
         [Key]
         [Required]
+        public int ID { get; set; }
+        [Required(ErrorMessage ="Vui lòng nhập mã học phần")]
         public int MaLHP { get; set; }
         [Required]
         public int NamHoc { get; set; }
