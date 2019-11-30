@@ -1,49 +1,77 @@
 ﻿@model MidTermNetCore.Models.SinhVien
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Sửa";
 }
 
-<h1>Edit</h1>
+<h1>Sửa</h1>
 
-<h4>SinhVien</h4>
+<h4>Sinh Viên</h4>
 <hr />
+<style>
+    label.error {
+        color: red;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" id="editForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MaSV" />
             <div class="form-group">
-                <label asp-for="HoTen" class="control-label"></label>
+                <label asp-for="HoTen" class="control-label">Họ tên</label>
                 <input asp-for="HoTen" class="form-control" />
                 <span asp-validation-for="HoTen" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NgaySinh" class="control-label"></label>
-                <input asp-for="NgaySinh" class="form-control" />
+                <label asp-for="NgaySinh" class="control-label">Ngày sinh</label>
+                <input asp-for="NgaySinh" type="date" class="form-control" />
                 <span asp-validation-for="NgaySinh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DienThoai" class="control-label"></label>
+                <label asp-for="DienThoai" class="control-label">Điện thoại</label>
                 <input asp-for="DienThoai" class="form-control" />
                 <span asp-validation-for="DienThoai" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MaKhoa" class="control-label"></label>
+                <label asp-for="MaKhoa" class="control-label">Khoa</label>
                 <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.MaKhoa"></select>
                 <span asp-validation-for="MaKhoa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Trở về danh sách</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script>
+        function IsPhone(value, object) {
+            var pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+            return this.optional(object) || pattern.test(value);
+        }
+        //B2: Định nghĩa thuộc tính kiểm tra trong jquery validation
+        $.validator.addMethod("phonenumber", IsPhone, "Không phải số điện thoại");
+        $(function () {
+            $("#editForm").validate({
+                rules: {
+                    HoTen: { required: true, minlength: 2 },
+                    NgaySinh: { required: true, minlength: 2 },
+                    DienThoai: { required: true, phonenumber: true },
+                },
+                messages: {
+                    HoTen: { required: "* Bắt buộc", minlength: "Từ 2 kí tự trở lên" },
+                    NgaySinh: { required: "* Bắt buộc", minlength: "Từ 2 kí tự trở lên" },
+                    DienThoai: { required: "* Bắt buộc", phonenumber: "Không đúng định dạng số điện thoại" },
+                }
+            });
+        });
+    </script>
 }
