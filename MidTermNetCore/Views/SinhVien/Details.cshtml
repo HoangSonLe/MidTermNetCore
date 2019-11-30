@@ -1,0 +1,36 @@
+﻿@model MidTermNetCore.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Chi Tiết";
+}
+
+<h1>Chi Tiết</h1>
+
+<div>
+    <h4>Sinh Viên</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Họ và Tên
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.HoTen
+        </dd>
+        <dt class = "col-sm-2">
+            Ngày Sinh
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.NgaySinh.ToString("dd-MM-yyyy")
+        </dd>
+        <dt class = "col-sm-2">
+            Điện Thoại
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.DienThoai
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaSV">Sửa</a> |
+    <a asp-action="Index">Trở về</a>
+</div>
