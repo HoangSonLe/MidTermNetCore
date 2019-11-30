@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MidTermNetCore.Models.Khoa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Danh sách khoa</h1>
+
+<p>
+    <a asp-action="Create">Tạo mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Số thứ tự</th>
+            <th>
+                Tên khoa
+            </th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int count = 1; }
+@foreach (var item in Model) {
+        <tr>
+            <td>@(count++)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhoa)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaKhoa">Sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.MaKhoa">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaKhoa">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
